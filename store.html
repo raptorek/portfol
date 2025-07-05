@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Raptorek</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+<body class="bg-white text-black font-sans antialiased">
+
+  <!-- MODAL -->
+  <div id="discordModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-xl p-8 text-center max-w-sm w-full shadow-xl scale-95 transition-transform duration-300 ease-in-out">
+      <h3 class="text-xl font-bold mb-4">Skontaktuj się</h3>
+      <p class="text-lg">Discord – <strong>raptorek77</strong></p>
+      <button onclick="closeModal()" class="mt-6 px-4 py-2 bg-black text-white rounded hover:bg-gray-800 transition-all duration-200">Zamknij</button>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="flex justify-end space-x-8 p-6 text-sm font-medium sticky top-0 bg-white z-30 shadow-sm">
+    <a href="#" class="hover:text-gray-900 transition-colors duration-200">Strona główna</a>
+    <a href="#portfolio" class="hover:text-gray-900 transition-colors duration-200">Portfolio</a>
+    <button onclick="openModal()" class="hover:text-gray-900 transition-colors duration-200">Kontakt</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between min-h-[80vh] py-10">
+    <div class="md:w-1/2 text-left">
+      <h1 class="text-5xl font-extrabold mb-6 leading-tight tracking-tight">Nowoczesne strony internetowe</h1>
+      <p class="text-gray-600 mb-6 text-lg leading-relaxed">
+        Jestem Raptorek i specjalizuje się w robieniu portfoliów.
+        U mnie każdy projekt jest dopracowany do ostatniego szczebelka.
+      </p>
+      <div class="flex space-x-4">
+        <a href="#portfolio" class="bg-black text-white px-6 py-3 rounded-md text-lg shadow-md hover:scale-105 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out">Zobacz portfolio →</a>
+        <button onclick="openModal()" class="border border-black px-6 py-3 rounded-md text-lg hover:bg-black hover:text-white hover:shadow-md hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-in-out">Zamów projekt →</button>
+      </div>
+    </div>
+    <div class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
+      <img src="sss.png" alt="Przykładowa grafika" class="w-80 h-auto rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out" />
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio" class="max-w-6xl mx-auto px-6 py-20 space-y-16">
+    <!-- Projekt 1 -->
+    <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col md:flex-row items-center md:items-start gap-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105 hover:-translate-y-1">
+      <div class="md:w-1/2">
+        <h2 class="text-4xl font-bold mb-3">???</h2>
+        <p class="text-xl text-gray-600 mb-3">???</p>
+        <p class="text-lg text-gray-600">???</p>
+      </div>
+      <div class="md:w-1/2">
+        <img src="ims.png" class="rounded-md shadow-md hover:scale-105 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ease-in-out" />
+      </div>
+    </div>
+
+    <!-- Projekt 2 -->
+    <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col md:flex-row-reverse items-center md:items-start gap-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105 hover:-translate-y-1">
+      <div class="md:w-1/2">
+        <h2 class="text-4xl font-bold mb-3">???</h2>
+        <p class="text-xl text-gray-600 mb-3">???</p>
+        <p class="text-lg text-gray-600">???</p>
+      </div>
+      <div class="md:w-1/2">
+        <img src="grafika2.png" class="rounded-md shadow-md hover:scale-105 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 ease-in-out" />
+      </div>
+    </div>
+  </section>
+
+  <!-- INNE PROJEKTY -->
+  <section class="max-w-6xl mx-auto px-6 pb-20">
+    <h2 class="text-4xl font-bold mb-6">Inne projekty</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <img src="grafika3.png" class="rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out" />
+      <img src="grafika4.png" class="rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out" />
+      <img src="grafika5.png" class="rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out" />
+    </div>
+  </section>
+
+  <!-- MODAL SKRYPT -->
+  <script>
+    function openModal() {
+      document.getElementById("discordModal").classList.remove("hidden");
+    }
+    function closeModal() {
+      document.getElementById("discordModal").classList.add("hidden");
+    }
+  </script>
+</body>
+</html> 
+
