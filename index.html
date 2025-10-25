@@ -13,7 +13,8 @@
     }
 
     body {
-      background-color: #1f1f1f; /* szare tło */
+      /* ==== SZARY GRADIENT NA CAŁE TŁO ==== */
+      background: linear-gradient(180deg, #141414 0%, #1f1f1f 40%, #2b2b2b 70%, #1a1a1a 100%);
       color: #f9f9f9;
       min-height: 100vh;
       display: flex;
@@ -24,55 +25,31 @@
       position: relative;
       opacity: 0;
       animation: fadeIn 1.5s ease forwards;
-      padding-top: 250px; /* ↓↓ PRZESUNIĘCIE WSZYSTKIEGO NIŻEJ ↓↓ */
+      padding-top: 250px;
     }
 
     @keyframes fadeIn {
       to { opacity: 1; }
     }
 
-    /* ===== PIORUNY ===== */
-    .lightning {
+    /* ===== ISKIERKI (KROPECZKI) ===== */
+    .spark {
       position: absolute;
-      width: 3px;
-      height: 90px;
-      background: none;
+      width: 4px;
+      height: 4px;
+      background: white;
+      border-radius: 50%;
       opacity: 0;
-      z-index: 1;
+      z-index: 0; /* pod tekstem */
       pointer-events: none;
-      animation: flash 3s infinite;
-      filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+      animation: sparkle 4s infinite ease-in-out;
+      box-shadow: 0 0 10px rgba(255,255,255,0.8);
     }
 
-    .lightning::before,
-    .lightning::after {
-      content: "";
-      position: absolute;
-      width: 3px;
-      background: rgba(255,255,255,0.9);
-      box-shadow: 0 0 15px rgba(255,255,255,0.8);
-    }
-
-    .lightning::before {
-      height: 45px;
-      transform: rotate(25deg);
-      top: 0;
-      left: 0;
-    }
-
-    .lightning::after {
-      height: 45px;
-      transform: rotate(-25deg);
-      top: 45px;
-      left: 8px;
-    }
-
-    @keyframes flash {
-      0%, 96%, 100% { opacity: 0; }
-      10%, 11% { opacity: 1; }
-      12%, 13% { opacity: 0.7; }
-      14%, 15% { opacity: 1; }
-      16%, 95% { opacity: 0; }
+    @keyframes sparkle {
+      0%, 95%, 100% { opacity: 0; transform: scale(0.5); }
+      10%, 50% { opacity: 1; transform: scale(1.1); }
+      70%, 90% { opacity: 0.5; transform: scale(0.8); }
     }
 
     /* ===== GŁÓWNA TREŚĆ ===== */
@@ -216,16 +193,27 @@
 </head>
 <body>
 
-  <!-- PIORUNY W TLE -->
+  <!-- ISKIERKI W TLE -->
   <script>
-    const lightningCount = 30;
-    for (let i = 0; i < lightningCount; i++) {
-      const bolt = document.createElement('div');
-      bolt.classList.add('lightning');
-      bolt.style.top = Math.random() * 100 + 'vh';
-      bolt.style.left = Math.random() * 100 + 'vw';
-      bolt.style.animationDelay = (Math.random() * 5).toFixed(2) + 's';
-      document.body.appendChild(bolt);
+    const sparkCount = 60; // ile kropek
+    for (let i = 0; i < sparkCount; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('spark');
+
+      // Losowa pozycja (unikamy środka ekranu z tekstem)
+      let top = Math.random() * 100;
+      let left = Math.random() * 100;
+
+      // Unikaj obszaru centralnego (ok. 30–70% wysokości i 20–80% szerokości)
+      if (top > 30 && top < 70 && left > 20 && left < 80) {
+        top = Math.random() < 0.5 ? Math.random() * 25 : 75 + Math.random() * 25;
+        left = Math.random() < 0.5 ? Math.random() * 15 : 85 + Math.random() * 15;
+      }
+
+      dot.style.top = top + 'vh';
+      dot.style.left = left + 'vw';
+      dot.style.animationDelay = (Math.random() * 5).toFixed(2) + 's';
+      document.body.appendChild(dot);
     }
   </script>
 
@@ -278,4 +266,3 @@
   </script>
 </body>
 </html>
-
