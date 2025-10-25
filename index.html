@@ -1,57 +1,281 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>WKRÓTCE!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrackLab</title>
   <style>
-    body {
+    * {
       margin: 0;
-      height: 100vh;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #1f1f1f; /* szare tło */
+      color: #f9f9f9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards;
+      padding-top: 250px; /* ↓↓ PRZESUNIĘCIE WSZYSTKIEGO NIŻEJ ↓↓ */
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* ===== PIORUNY ===== */
+    .lightning {
+      position: absolute;
+      width: 3px;
+      height: 90px;
+      background: none;
+      opacity: 0;
+      z-index: 1;
+      pointer-events: none;
+      animation: flash 3s infinite;
+      filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+    }
+
+    .lightning::before,
+    .lightning::after {
+      content: "";
+      position: absolute;
+      width: 3px;
+      background: rgba(255,255,255,0.9);
+      box-shadow: 0 0 15px rgba(255,255,255,0.8);
+    }
+
+    .lightning::before {
+      height: 45px;
+      transform: rotate(25deg);
+      top: 0;
+      left: 0;
+    }
+
+    .lightning::after {
+      height: 45px;
+      transform: rotate(-25deg);
+      top: 45px;
+      left: 8px;
+    }
+
+    @keyframes flash {
+      0%, 96%, 100% { opacity: 0; }
+      10%, 11% { opacity: 1; }
+      12%, 13% { opacity: 0.7; }
+      14%, 15% { opacity: 1; }
+      16%, 95% { opacity: 0; }
+    }
+
+    /* ===== GŁÓWNA TREŚĆ ===== */
+    header {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at center, #00111a 0%, #000 100%);
-      font-family: 'Montserrat', sans-serif;
-      overflow: hidden;
+      gap: 60px;
+      flex-wrap: wrap;
+      text-align: left;
+      z-index: 2;
+      transform: translateY(-30px);
+      animation: slideDown 1s ease forwards;
     }
 
-    .neon-text {
-      font-size: clamp(32px, 8vw, 80px);
+    @keyframes slideDown {
+      to { transform: translateY(0); }
+    }
+
+    .info {
+      max-width: 400px;
+    }
+
+    .info h1 {
+      font-size: 3rem;
       font-weight: 700;
-      color: #00c3ff;
-      text-transform: uppercase;
-      text-shadow:
-        0 0 4px #000,
-        2px 2px 6px #000,
-        0 0 8px #00c3ff,
-        0 0 20px #00c3ff,
-        0 0 40px rgba(0,195,255,0.7);
-      opacity: 0;
-      transform: scale(0.8) translateY(40px);
-      animation: enter 1.8s ease forwards;
+      color: #fff;
     }
 
-    @keyframes enter {
-      0% {
-        opacity: 0;
-        transform: scale(0.8) translateY(40px);
-      }
-      60% {
-        opacity: 1;
-        transform: scale(1.05) translateY(0);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
+    .info span {
+      color: #ccc;
+    }
+
+    .info p {
+      font-size: 1rem;
+      color: #bbb;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .discord-btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 25px;
+      background: #fff;
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .discord-btn:hover {
+      background: #000;
+      color: #fff;
+      transform: scale(1.05);
+      border: 1px solid #fff;
+    }
+
+    .preview {
+      width: 400px;
+      height: 200px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid #333;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .preview:hover {
+      transform: translateY(-5px);
+      border-color: #777;
+    }
+
+    .preview img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
+      filter: brightness(1);
+      transition: all 0.3s ease;
+    }
+
+    .preview img:hover {
+      transform: scale(1.05);
+    }
+
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-top: 60px;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeUp 1.3s 0.5s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px 50px;
+      border-radius: 15px;
+      border: 1px solid #333;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(255,255,255,0.15);
+      border-color: #555;
+    }
+
+    .number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .label {
+      font-size: 0.9rem;
+      color: #aaa;
+      margin-top: 5px;
+    }
+
+    footer {
+      margin-top: 80px;
+      color: #888;
+      font-size: 0.8rem;
+      z-index: 2;
     }
   </style>
 </head>
 <body>
-  <div class="neon-text">WKRÓTCE!</div>
+
+  <!-- PIORUNY W TLE -->
+  <script>
+    const lightningCount = 30;
+    for (let i = 0; i < lightningCount; i++) {
+      const bolt = document.createElement('div');
+      bolt.classList.add('lightning');
+      bolt.style.top = Math.random() * 100 + 'vh';
+      bolt.style.left = Math.random() * 100 + 'vw';
+      bolt.style.animationDelay = (Math.random() * 5).toFixed(2) + 's';
+      document.body.appendChild(bolt);
+    }
+  </script>
+
+  <header>
+    <div class="info">
+      <h1>Crack<span>Lab</span></h1>
+      <p>Najlepsze miejsce dla osób które nie wydają pieniędzy na gry.  
+         a chcą sobie pograć w najnowsze tytuły 🔧 </p>
+      <a href="https://discord.gg/fmS5sS9s" class="discord-btn">Dołącz do Discorda</a>
+    </div>
+
+    <div class="preview">
+      <img src="123.png" alt="Logo Discord CrackLab">
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stat-box">
+      <div class="number" data-target="1500">0</div>
+      <div class="label">Ilość członków serwera</div>
+    </div>
+    <div class="stat-box">
+      <div class="number" data-target="832">0</div>
+      <div class="label">Ilość scrackowanych gier</div>
+    </div>
+  </section>
+
+  <footer>© 2025 CrackLab. Wszystkie prawa zastrzeżone.</footer>
+
+  <script>
+    // ===== ANIMACJA LICZNIKÓW =====
+    const counters = document.querySelectorAll('.number');
+    const speed = 150;
+
+    counters.forEach(counter => {
+      const updateCount = () => {
+        const target = +counter.getAttribute('data-target');
+        const count = +counter.innerText;
+        const increment = Math.ceil(target / speed);
+
+        if (count < target) {
+          counter.innerText = count + increment;
+          setTimeout(updateCount, 25);
+        } else {
+          counter.innerText = target.toLocaleString();
+        }
+      };
+      updateCount();
+    });
+  </script>
 </body>
 </html>
-
 
